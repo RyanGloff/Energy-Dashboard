@@ -25,7 +25,7 @@ async function main() {
         }
     });
 
-    // Periodically purge the ond data to keep it from filling up drive
+    // Periodically purge the old data to keep it from filling up drive
     setInterval(() => {
       purgeOldEmeterData(31)
         .then(remainingRecords => postLog(`There are ${remainingRecords} remaining`, 'Emeter Data Purge'));
