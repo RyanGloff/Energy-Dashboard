@@ -105,103 +105,37 @@ class Graph extends HTMLElement {
             return;
         }
         this.#newChartLoading = true;
-        const aliasStr = this.#model.getDeviceAlias().replace(/\s+/g, '+');
-        const numDays = this.#model.getNumDays();
-        const frequency = this.#model.getFrequency();
-        const connectionStr = `/emeter?numDays=${numDays}&alias=${aliasStr}&frequency=${frequency}`;
-        console.log(`Fetch: ${connectionStr}`);
-        fetch(connectionStr)
-            .then(res => {
-                res.json()
-                    .then(raw => raw.data.map(v => {
-                        return {
-                            currentMA: v.current_ma,
-                            voltageMV: v.voltage_mv,
-                            powerMW: v.power_mw,
-                            totalWH: v.total_wh,
-                            timestamp: (new Date(v.timestamp)).getTime()
-                        }   
-                    }))
-                    .then(data => {
-                        return [
-                            {
-                                label: 'currentMA',
-                                borderColor: 'rgb(201, 203, 207)',
-                                backgroundColor: 'rgb(201, 203, 207)',
-                                data: data.map(v => {
-                                    return {
-                                        x: v.timestamp,
-                                        y: v.currentMA
-                                    };
-                                })
-                            },
-                            {
-                                label: 'voltageMV',
-                                borderColor: 'rgb(54, 162, 235)',
-                                backgroundColor: 'rgb(54, 162, 235)',
-                                data: data.map(v => {
-                                    return {
-                                        x: v.timestamp,
-                                        y: v.voltageMV
-                                    };
-                                })
-                            },
-                            {
-                                label: 'powerMW',
-                                borderColor: 'rgb(75, 192, 192)',
-                                backgroundColor: 'rgb(75, 192, 192)',
-                                data: data.map(v => {
-                                    return {
-                                        x: v.timestamp,
-                                        y: v.powerMW
-                                    };
-                                })
-                            },
-                            {
-                                label: 'totalWH',
-                                borderColor: 'rgb(153, 102, 255)',
-                                backgroundColor: 'rgb(153, 102, 255)',
-                                data: data.map(v => {
-                                    return {
-                                        x: v.timestamp,
-                                        y: v.totalWH
-                                    };
-                                })
-                            }
-                        ]
-                    })
-                    .then(datasets => {
-                        this.#chart = new Chart(this.#canvasId, {
-                            type: 'scatter',
-                            data: {
-                                datasets
-                            },
-                            options: {
-                                showLine: true,
-                                scales: {
-                                    x: {
-                                        type: 'time',
-                                        ticks: {
-                                            autoSkip: true,
-                                            maxTicksLimit: 20
-                                        },
-                                        time: {
-                                            unit: 'minute',
-                                            displayFormats: {
-                                                minute: 'yy/MM/dd HH:mm'
-                                            },
-                                            tooltipFormat: 'yy/MM/dd HH:mm'
-                                        },
-                                        title: {
-                                            display: true,
-                                            text: 'Date'
-                                        }
-                                    }
+
+        backendClient.getDeviceChartData(this.#model.getDeviceAlias(), this.#model.getNumDays(), this.#model.getFrequency())
+            .then(datasets => {
+                this.#chart = new Chart(this.#canvasId, {
+                    type: 'scatter',
+                    data: { datasets },
+                    options: {
+                        showLine: true,
+                        scales: {
+                            x: {
+                                type: 'time',
+                                ticks: {
+                                    autoSkip: true,
+                                    maxTicksLimit: 20
+                                },
+                                time: {
+                                    unit: 'minute',
+                                    displayFormats: {
+                                        minute: 'yy/MM/dd HH:mm'
+                                    },
+                                    tooltipFormat: 'yy/MM/dd HH:mm'
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Date'
                                 }
                             }
-                        });
-                        this.#newChartLoading = false;
-                    });
+                        }
+                    }
+                });
+                this.#newChartLoading = false;
             });
     }
 
