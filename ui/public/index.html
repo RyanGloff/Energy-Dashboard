@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kasa Emeter UI</title>
+        <link rel="stylesheet" href="css/constants.css"/>
+        <link rel="stylesheet" href="css/main.css"/>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.30.1/date_fns.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+
+        <script defer src="js/utils.js"></script>
+
+        <script defer src="js/components/GraphModel.js"></script>
+        <script defer src="js/components/Graph.js"></script>
+
+        <script defer src="js/main.js"></script>
+    </head>
+    <body>
+        <h1>Kasa Emeter UI</h1>
+        <app-graph device-alias="WB Heater" num-days="0.25"></app-graph>
+    </body>
+</html>
