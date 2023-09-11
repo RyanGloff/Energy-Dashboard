@@ -1,3 +1,5 @@
+-- Example usage:
+-- psql -U energy-dashboard-app-user -d energy-dashboard -W -f schema/create-schema.sql
 
 -- Create sequences
 CREATE SEQUENCE IF NOT EXISTS public.alarms_id_seq;
@@ -35,9 +37,10 @@ CREATE TABLE public.alarms(
 
 DROP TABLE IF EXISTS public.devices;
 CREATE TABLE public.devices(
-    id bigint NOT NULL DEFAULT nextval('devices_id_seq':regclass),
+    id bigint NOT NULL DEFAULT nextval('devices_id_seq'::regclass),
     alias character varying NOT NULL,
-    CONSTRAINT devices_pkey PRIMARY KEY (id, alias)
+    CONSTRAINT devices_pkey PRIMARY KEY (id, alias),
+    UNIQUE (id)
 );
 
 DROP TABLE IF EXISTS public.emeter_data;
