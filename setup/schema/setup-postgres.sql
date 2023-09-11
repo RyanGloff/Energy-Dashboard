@@ -1,5 +1,5 @@
 -- Example usage
--- sudo -u postgres psql < schema/setup-postgres.sql
+-- sudo -u postgres psql < setup/schema/setup-postgres.sql
 
 CREATE DATABASE "energy-dashboard";
 \c energy-dashboard

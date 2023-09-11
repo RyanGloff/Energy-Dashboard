@@ -1,5 +1,5 @@
 -- Example usage:
--- psql -U energy-dashboard-app-user -d energy-dashboard -W -f schema/create-schema.sql
+-- psql -U energy-dashboard-app-user -d energy-dashboard -W -f setup/schema/create-schema.sql
 
 -- Create sequences
 CREATE SEQUENCE IF NOT EXISTS public.alarms_id_seq;

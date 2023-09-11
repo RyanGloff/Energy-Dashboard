@@ -5,10 +5,10 @@ let client = null;
 async function ensureClient() {
     if (client !== null) return;
     client = new Client({
-        user: 'emeter-data-user',
+        user: 'energy-dashboard-app-user',
         host: 'localhost',
         database: 'emeter-data',
-        password: 'password()!',
+        password: 'password',
         port: 5432
     });
     await client.connect();
