@@ -7,7 +7,7 @@ async function ensureClient() {
     client = new Client({
         user: 'energy-dashboard-app-user',
         host: 'localhost',
-        database: 'emeter-data',
+        database: 'energy-dashboard',
         password: 'password',
         port: 5432
     });
