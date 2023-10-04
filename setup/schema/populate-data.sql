@@ -1,0 +1,20 @@
+INSERT INTO public.devices(alias)
+VALUES
+('10G Air'),
+('10G Filter'),
+('10G Heater'),
+('10G Light'),
+('10G Plug 3'),
+('10G Plug 5'),
+('FWR Filter'),
+('FWR Left Heater'),
+('FWR Lg Wave Maker'),
+('FWR Light'),
+('FWR Right Heater'),
+('FWR Sm Wave Maker'),
+('WB ATO'),
+('WB Heater'),
+('WB Light Left'),
+('WB Light Right'),
+('WB Nero 5'),
+('WB Return Pump');
