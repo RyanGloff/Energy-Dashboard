@@ -9,7 +9,7 @@ async function postError(type, err, deviceAlias) {
 }
 
 async function getSpaceUsed() {
-    return (await (await grabClient()).query(`SELECT pg_size_pretty(pg_database_size('emeter-data'));`)).rows[0].pg_size_pretty;
+    return (await (await grabClient()).query(`SELECT pg_size_pretty(pg_database_size('energy-dashboard'));`)).rows[0].pg_size_pretty;
 }
 
 async function postLog(message, location) {
